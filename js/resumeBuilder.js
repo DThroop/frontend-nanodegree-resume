@@ -35,10 +35,24 @@ currentJob["employer"]="Pacific Cabinets, Inc.";
 currentJob["years"]=10;
 currentJob["city"]="Ferdinand";
 
-var education={};
-education.name="University of Idaho";
-education.years=4;
-education.city="Moscow, ID";
+var education = {
+  "schools" : [
+    {
+      "name" : "University of Idaho",
+      "city" : "Moscow, ID",
+      "degree" : "BS",
+      "major" : ["Computer Science","Political Science"]
+    },
+    {
+      "name" : "Kamiah High School",
+      "city" : "Kamiah, ID",
+      "degree" : "Diploma"
+    }
+  ]
+};
+//education.name="University of Idaho";
+//education.years=4;
+//education.city="Moscow, ID";
 
 //var formattedName=HTMLheaderName.replace("%data%", bio.name);
 //var formattedRole=HTMLheaderRole.replace("%data%", bio.role);
@@ -58,4 +72,4 @@ $("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
 $("#header").prepend(HTMLbioPic.replace("%data%",bio.BioPic));
 
 $("#main").append(currentJob.position);
-$("#main").append(education["name"]);
+$("#main").append(education["schools"].name);
