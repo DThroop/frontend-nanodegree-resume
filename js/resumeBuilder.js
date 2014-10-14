@@ -60,7 +60,6 @@ var education = {
 //console.log(formattedName);
 //console.log(formattedRole);
 
-$("#header").prepend(HTMLskills.replace("%data%",bio.skills));
 $("#header").prepend(HTMLlocation.replace("%data%",bio.contacts.location));
 $("#header").prepend(HTMLgithub.replace("%data%",bio.contacts.github));
 $("#header").prepend(HTMLtwitter.replace("%data%",bio.contacts.twitter));
@@ -73,3 +72,9 @@ $("#header").prepend(HTMLbioPic.replace("%data%",bio.BioPic));
 
 $("#main").append(currentJob.position);
 $("#main").append(education["schools"].name);
+
+if(skills.length!=0)
+{
+  $("#header").append(HTMLskillsStart)
+  $("#skills").append(HTMLskills.replace("%data%",bio.skills));
+}
