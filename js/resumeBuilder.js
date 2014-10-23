@@ -8,11 +8,10 @@
 //var name="Dean Throop";
 //var role="Software Engineer";
 
-var skills=["awesomeness","programming","teaching","JS"];
-
 //$("#main").append(skills[0]);
 
 //$("#main").append(skills.length);
+//var skills=["awesomeness","programming","teaching","JS"];
 
 var bio={
   "name" : "Dean Throop",
@@ -26,28 +25,48 @@ var bio={
   },
   "BioPic" : "images/fry.jpg",
   "welcome" : "Howdy ho neighbor!",
-  "skills" : skills
+  "skills" : [
+  "awesomeness",
+  "programming",
+  "teaching",
+  "JS"
+  ]
 };
 
-var currentJob={};
-currentJob["position"]="IT Manager";
-currentJob["employer"]="Pacific Cabinets, Inc.";
-currentJob["years"]=10;
-currentJob["city"]="Ferdinand";
+var work={
+  "jobs" : [
+  {
+    "company" : "Pacific Cabinets, Inc.",
+    "city" : "Ferdinand",
+    "title" : "IT Manager",
+    "state" : "ID",
+    "date" : "April 2009-current",
+    "description" : "I did something"
+  },
+  {
+    "company" : "University of Idaho",
+    "city" : "Moscow",
+    "title" : "Bitch",
+    "state" : "ID",
+    "date" : "May 2008-April 2009",
+    "description" : "I did something"
+  }
+  ]
+};
 
 var education = {
   "schools" : [
-    {
-      "name" : "University of Idaho",
-      "city" : "Moscow, ID",
-      "degree" : "BS",
-      "major" : ["Computer Science","Political Science"]
-    },
-    {
-      "name" : "Kamiah High School",
-      "city" : "Kamiah, ID",
-      "degree" : "Diploma"
-    }
+  {
+    "name" : "University of Idaho",
+    "city" : "Moscow, ID",
+    "degree" : "BS",
+    "major" : ["Computer Science","Political Science"]
+  },
+  {
+    "name" : "Kamiah High School",
+    "city" : "Kamiah, ID",
+    "degree" : "Diploma"
+  }
   ]
 };
 //education.name="University of Idaho";
@@ -70,11 +89,26 @@ $("#header").prepend(HTMLheaderRole.replace("%data%", bio.role));
 $("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
 $("#header").prepend(HTMLbioPic.replace("%data%",bio.BioPic));
 
-$("#main").append(currentJob.position);
+//$("#main").append(currentJob.position);
 $("#main").append(education["schools"].name);
 
-if(skills.length!=0)
+//$("#header").append(HTMLskillsStart);
+//for(skill in bio.skills)
+if(bio.skills!=0)
 {
-  $("#header").append(HTMLskillsStart)
+  $("#header").append(HTMLskillsStart);
   $("#skills").append(HTMLskills.replace("%data%",bio.skills));
+}
+
+for(job in work.jobs)
+{
+  var formattedEmployer =
+    HTMLworkEmployer.replace("%data%",work.jobs[job].company);
+  var formattedTitle =
+    HTMLworkTitle.replace("%data%",work.jobs[job].title);
+
+  $("#workExperience").append(HTMLworkStart);
+  $(".work-entry:last").append(formattedEmployer+formattedTitle);
+  $(".work-entry:last").append(
+    HTMLworkDates.replace("%data%",work.jobs[job].date));
 }
