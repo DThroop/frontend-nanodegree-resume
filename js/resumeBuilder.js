@@ -69,6 +69,23 @@ var education = {
   }
   ]
 };
+
+var projects = {
+  "theProjects" : [
+    {
+      "title" : "A Proj Title",
+      "dates" : "2014-2015",
+      "description" : "A description",
+      "image" : "something.jpg"
+    },
+    {
+      "title" : "Another Proj Title",
+      "dates" : "2015-2016",
+      "description" : "Another description",
+      "image" : "another.jpg"
+    }
+  ]
+};
 //education.name="University of Idaho";
 //education.years=4;
 //education.city="Moscow, ID";
@@ -100,15 +117,68 @@ if(bio.skills!=0)
   $("#skills").append(HTMLskills.replace("%data%",bio.skills));
 }
 
-for(job in work.jobs)
-{
-  var formattedEmployer =
-    HTMLworkEmployer.replace("%data%",work.jobs[job].company);
-  var formattedTitle =
-    HTMLworkTitle.replace("%data%",work.jobs[job].title);
+$(document).click(function(loc){
+  //logClicks(loc.clientX,loc.clientY);
+  logClicks(loc.pageX,loc.pageY);
+  //pageX or pageY
+  //http://dev-notes.com/code.php?q=33 for production grade code
+});
 
-  $("#workExperience").append(HTMLworkStart);
-  $(".work-entry:last").append(formattedEmployer+formattedTitle);
-  $(".work-entry:last").append(
-    HTMLworkDates.replace("%data%",work.jobs[job].date));
+displayWork();
+
+$("#main").append(internationalizeButton);
+
+function displayWork()
+{
+  for(job in work.jobs)
+  {
+    var formattedEmployer =
+      HTMLworkEmployer.replace("%data%",work.jobs[job].company);
+    var formattedTitle =
+      HTMLworkTitle.replace("%data%",work.jobs[job].title);
+
+    $("#workExperience").append(HTMLworkStart);
+    $(".work-entry:last").append(formattedEmployer+formattedTitle);
+    $(".work-entry:last").append(
+      HTMLworkDates.replace("%data%",work.jobs[job].date));
+  }
+}
+
+function inName(name)
+{
+  var names=name.trim().split(" ");
+  names[0]=
+    names[0].slice(0,1).toUpperCase() +
+    names[0].slice(1).toLowerCase();
+  return names[0] + " " + names[1].toUpperCase();
+}
+
+projects.display = function()
+{
+  for (project in projects.theProjects)
+  {
+    $("#projects").append(HTMLprojectStart);
+    $("#projects").append(
+      HTMLprojectTitle.replace("%data%",projects.theProjects[project].title));
+    $("#projects").append(
+      HTMLprojectDates.replace("%data%",projects.theProjects[project].dates));
+    $("#projects").append(
+      HTMLprojectDescription.replace("%data%",projects.theProjects[project].description));
+    //$("#projects").append(
+    //  HTMLprojectImage.replace("%data%",projects[project].image));
+  }
+}
+
+projects.display();
+
+function locationizer(work_obj) {
+  var locations=[];
+  for(job in work_obj.jobs)
+  {
+    //console.log(locations.length);
+    //console.log(work_obj.jobs[job].location);
+    locations.push(work_obj.jobs[job].location);
+  }
+  //locations.pop();
+  return locations;
 }
